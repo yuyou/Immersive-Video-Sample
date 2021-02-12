@@ -45,6 +45,14 @@ TARGET_LINK_LIBRARIES(360SCVP glog)
 TARGET_LINK_LIBRARIES(360SCVP safestring_shared)
 TARGET_LINK_LIBRARIES(360SCVP dl)
 
+##
+# demo
+##
+
+add_executable (demo demo.cpp)
+target_link_libraries (demo LINK_PUBLIC 360SCVP)
+
+########################
 install(TARGETS 360SCVP
     LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
     ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"

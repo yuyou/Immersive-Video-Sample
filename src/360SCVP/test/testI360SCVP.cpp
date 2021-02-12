@@ -28,10 +28,19 @@
 #include <string>
 #include <fstream>
 #include "../360SCVPAPI.h"
-
+/*
 extern "C" {
     #include "safestringlib/safe_mem_lib.h"
 }
+*/
+
+
+#include <string.h>
+
+#define memset_s(a, s, b) memset(a, b, s)
+//#define memcpy_s(a, s, b) memcpy(a, b, s)
+#define memcpy_s(a, s1, b, s2) memcpy(a, b, s1)
+#define memmove_s(a, s1, b, s2) memmove(a, b, s1)
 
 namespace{
 class I360SCVPTest : public testing::Test {
