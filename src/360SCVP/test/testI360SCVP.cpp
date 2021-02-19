@@ -255,7 +255,7 @@ TEST_F(I360SCVPTest, GenerateSPS_PPS_SliceHdr)
         nal.data = pInputBufferTmp;
         nal.dataSize = bufferlen;
         ret = I360SCVP_ParseNAL(&nal, pI360SCVP);
-        if (nal.naluType == 33)
+        if (nal.naluType == 33)  // SPS
         {
             param.pInputBitstream = nal.data;
             param.inputBitstreamLen = nal.dataSize;
@@ -265,7 +265,7 @@ TEST_F(I360SCVPTest, GenerateSPS_PPS_SliceHdr)
             if (ret < 0)
                 printf("generate sps error\n");
         }
-        else if (nal.naluType == 34)
+        else if (nal.naluType == 34)  // PPS
         {
             uint16_t width[2] = { 720, 720 };
             uint16_t height[2] = { 360, 360 };
@@ -280,7 +280,7 @@ TEST_F(I360SCVPTest, GenerateSPS_PPS_SliceHdr)
             if (ret < 0)
                 printf("generate pps error\n");
         }
-        else if (nal.naluType < 22)
+        else if (nal.naluType < 22)  // Slices
         {
             param.pInputBitstream = pInputBuffer;
             param.inputBitstreamLen = bufferlen;
@@ -582,7 +582,8 @@ TEST_F(I360SCVPTest, SetViewportSEI)
     paramViewPorInfo.paramVideoFP.rows = 1;
     paramViewPorInfo.paramVideoFP.faces[0][0].idFace = 0;
     paramViewPorInfo.paramVideoFP.faces[0][0].rotFace = NO_TRANSFORM;
-    ret = I360SCVP_SetParameter(pI360SCVP, ID_SCVP_PARAM_VIEWPORT, &paramViewPorInfo);    EXPECT_TRUE(ret == 0);
+    ret = I360SCVP_SetParameter(pI360SCVP, ID_SCVP_PARAM_VIEWPORT, &paramViewPorInfo);  
+    EXPECT_TRUE(ret == 0);
     if (ret)
     {
         I360SCVP_unInit(pI360SCVP);
